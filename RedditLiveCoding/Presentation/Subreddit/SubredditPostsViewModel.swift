@@ -34,7 +34,7 @@ class SubredditPostsViewModel: ObservableObject {
     func fetchNextPage() {
         guard canLoadNextPage else { return }
 
-        RedditAPI.fetchPosts(subreddit: subredditName, sort: sortOrder.rawValue, after: nil)
+        RedditAPI.fetchPosts(subreddit: subredditName, sort: sortOrder.rawValue, after: posts.last?.id)
             .print()
             .replaceError(with: [])
             .sink { [weak self] (posts: [SubredditPost]) in
