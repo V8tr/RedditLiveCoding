@@ -1,13 +1,13 @@
 //
-//  Reddit2UITests.swift
-//  Reddit2UITests
+//  RedditLiveCodingUITests.swift
+//  RedditLiveCodingUITests
 //
 //  Created by Vadim Bulavin on 8/16/20.
 //
 
 import XCTest
 
-class Reddit2UITests: XCTestCase {
+class RedditLiveCodingUITests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.

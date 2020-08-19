@@ -1,6 +1,6 @@
 //
 //  SubredditPostsViewModel.swift
-//  Reddit2
+//  RedditLiveCoding
 //
 //  Created by Vadim Bulavin on 8/17/20.
 //

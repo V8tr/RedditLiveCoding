@@ -1,6 +1,6 @@
 //
 //  CommentsView.swift
-//  Reddit2
+//  RedditLiveCoding
 //
 //  Created by Vadim Bulavin on 8/19/20.
 //
@@ -15,13 +15,27 @@ struct CommentsView: View {
     }
     
     var body: some View {
+        Group {
+            if viewModel.comments.isEmpty {
+                spinner
+            } else {
+                list
+            }
+        }
+        .onAppear(perform: viewModel.fetchComments)
+    }
+    
+    var list: some View {
         LazyVStack(alignment: .leading) {
             ForEach(viewModel.comments) { comment in
                 CommentRowView(comment: comment)
                 Divider()
             }
         }
-        .onAppear(perform: viewModel.fetchComments)
+    }
+    
+    var spinner: some View {
+        Spinner(style: .medium)
     }
 }
 

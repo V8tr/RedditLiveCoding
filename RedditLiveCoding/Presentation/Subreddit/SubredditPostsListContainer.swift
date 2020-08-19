@@ -1,6 +1,6 @@
 //
 //  SubredditPostsListContainer.swift
-//  Reddit2
+//  RedditLiveCoding
 //
 //  Created by Vadim Bulavin on 8/19/20.
 //
@@ -15,10 +15,24 @@ struct SubredditPostsListContainer: View {
     }
     
     var body: some View {
+        Group {
+            if viewModel.posts.isEmpty {
+                spinner
+            } else {
+                list
+            }
+        }
+        .onAppear(perform: viewModel.fetchNextPage)
+    }
+    
+    var list: some View {
         SubredditPostsListView(
             posts: viewModel.posts,
             onScrolledAtEnd: viewModel.fetchNextPage
         )
-        .onAppear(perform: viewModel.fetchNextPage)
+    }
+    
+    var spinner: some View {
+        Spinner(style: .medium)
     }
 }
