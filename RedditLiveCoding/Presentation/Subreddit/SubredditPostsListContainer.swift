@@ -10,8 +10,8 @@ import SwiftUI
 struct SubredditPostsListContainer: View {
     @StateObject var viewModel: SubredditPostsViewModel
     
-    init(subredditName: String) {
-        _viewModel = .init(wrappedValue:  SubredditPostsViewModel(subredditName: subredditName))
+    init(subreddit: String) {
+        _viewModel = .init(wrappedValue:  SubredditPostsViewModel(subreddit: subreddit))
     }
     
     var body: some View {

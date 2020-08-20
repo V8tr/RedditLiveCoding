@@ -10,31 +10,21 @@ import Combine
 import SwiftUI
 
 class SubredditPostsViewModel: ObservableObject {
+    let subreddit: String
     
-    let subredditName: String
-    
-    @Published var subreddit: Subreddit?
     @Published var posts: [SubredditPost] = []
     private var canLoadNextPage = true
-
-    @AppStorage("subreddit-default-sort") var sortOrder = Sort.hot {
-        didSet {
-            posts = []
-            canLoadNextPage = true
-            fetchNextPage()
-        }
-    }
     
     private var subscriptions = Set<AnyCancellable>()
 
-    init(subredditName: String) {
-        self.subredditName = subredditName
+    init(subreddit: String) {
+        self.subreddit = subreddit
     }
     
     func fetchNextPage() {
         guard canLoadNextPage else { return }
 
-        RedditAPI.fetchPosts(subreddit: subredditName, sort: sortOrder.rawValue, after: posts.last?.id)
+        RedditAPI.fetchPosts(subreddit: subreddit, sort: "hot", after: posts.last?.id)
             .print()
             .replaceError(with: [])
             .sink { [weak self] (posts: [SubredditPost]) in

@@ -37,10 +37,4 @@ struct SubredditPostRowView: View {
             }
         }
     }
-    
-    var preview: some View {
-        let url = post.url.map(Text.init)
-        let selftext = post.selftext.map(Text.init)
-        return selftext ?? url ?? Text(" ")
-    }
 }

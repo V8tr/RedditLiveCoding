@@ -38,11 +38,11 @@ struct PostDetailView: View {
         if let text = post.selftext ?? post.description {
             Text(text).font(.body)
         }
-        if let url = post.url, let realURL = URL(string: url) {
-            if realURL.pathExtension == "jpg" || realURL.pathExtension == "png" {
+        if let url = post.url.flatMap { URL(string: $0) } {
+            if url.pathExtension == "jpg" || url.pathExtension == "png" {
                 HStack {
                     Spacer()
-                    WebImage(url: realURL)
+                    WebImage(url: url)
                         .resizable()
                         .indicator(.activity)
                         .aspectRatio(contentMode: .fit)
