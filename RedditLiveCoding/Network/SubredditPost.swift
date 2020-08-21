@@ -55,7 +55,7 @@ extension SubredditPost {
         ups: 10,
         downs: 3,
         score: 7,
-        url: nil,
+        url: "https://www.google.com",
         permalink: nil,
         linkFlairText: "Flair",
         linkFlairBackgroundColor: nil,

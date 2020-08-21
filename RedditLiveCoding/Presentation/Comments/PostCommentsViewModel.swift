@@ -14,7 +14,7 @@ class PostCommentsViewModel: ObservableObject {
         self.subreddit = subreddit
     }
     
-    @Published var comments: [Comment] = []
+    @Published var comments: [Comment]?
     let postID: String
     let subreddit: String
     private var subscriptions = Set<AnyCancellable>()

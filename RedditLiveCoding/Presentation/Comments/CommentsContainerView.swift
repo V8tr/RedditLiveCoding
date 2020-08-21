@@ -1,5 +1,5 @@
 //
-//  CommentsView.swift
+//  CommentsContainerView.swift
 //  RedditLiveCoding
 //
 //  Created by Vadim Bulavin on 8/19/20.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CommentsView: View {
+struct CommentsContainerView: View {
     @StateObject var viewModel: PostCommentsViewModel
     
     init(postID: String, subreddit: String) {
@@ -16,10 +16,10 @@ struct CommentsView: View {
     
     var body: some View {
         Group {
-            if viewModel.comments.isEmpty {
-                Spinner(style: .medium)
+            if let comments = viewModel.comments {
+                CommentsRecursiveView(comments: comments)
             } else {
-                CommentsRecursiveView(comments: viewModel.comments)
+                Spinner(style: .medium)
             }
         }
         .onAppear(perform: viewModel.fetchComments)

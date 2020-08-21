@@ -10,15 +10,17 @@ import SDWebImageSwiftUI
 
 struct PostDetailView: View {
     let post: SubredditPost
-    
+
     var body: some View {
-        List {
+        ScrollView {
             VStack(alignment: .leading, spacing: 20) {
                 title
                 content
                 MetadataView(post: post)
-                CommentsView(postID: post.id, subreddit: post.subreddit)
+                CommentsContainerView(postID: post.id, subreddit: post.subreddit)
             }
+            .frame(idealWidth: .infinity, maxWidth: .infinity)
+            .padding()
         }
     }
     
@@ -38,7 +40,7 @@ struct PostDetailView: View {
         if let text = post.selftext ?? post.description {
             Text(text).font(.body)
         }
-        if let url = post.url.flatMap { URL(string: $0) } {
+        if let url = post.url.flatMap({ URL(string: $0) }) {
             if url.pathExtension == "jpg" || url.pathExtension == "png" {
                 HStack {
                     Spacer()
@@ -51,6 +53,8 @@ struct PostDetailView: View {
                         .padding()
                     Spacer()
                 }
+            } else if post.selftext == nil || post.selftext?.isEmpty == true {
+                LinkPresentationView(url: url)
             }
         }
     }
